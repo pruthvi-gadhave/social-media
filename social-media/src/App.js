@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import CreatePost from './components/CreatePost';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Postlist from './components/PostList';
+import Sidebar from './components/Sidebar';
 
 function App() {
+
+
+  const [selectedTab, setSelectedTab] = useState("Home");
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='d-flex '>
+        <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+        <div className='contents'>
+          <Header />
+          {
+            selectedTab === "Home" ? <Postlist/>  : <CreatePost /> 
+          }
+
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }
